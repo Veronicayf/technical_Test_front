@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 const App = () => {
 
   return (
-    <div className='bg-zinc-900 h-screen text-white'>
+    <div className='bg-white text-white'>
       <div className='flex item-center justify-center h-full'>
         <BrowserRouter>
           <Routes>

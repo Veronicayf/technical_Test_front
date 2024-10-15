@@ -1,12 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Usamos la variable de entorno para el backend
 const API_URL = 'http://localhost:3000';
 
-// Thunks para manejar peticiones a la API
-
-// Obtener todas las tareas
 export const fetchTasks = createAsyncThunk('task/fetchTasks', async () => {
     const response = await axios.get(`${API_URL}/task`);
     return response.data;
@@ -18,12 +14,15 @@ export const addTask = createAsyncThunk('task/addTask', async (newTask) => {
     return response.data;
 });
 
-// Editar una tarea
-export const editTask = createAsyncThunk('task/editTask', async (updatedTask) => {
-    const { id, title, review } = updatedTask;
-    const response = await axios.put(`${API_URL}/task/${id}`, { title, review });
-    return response.data;
-});
+
+// Actualizar el estado de una tarea
+export const updateTaskStatus = createAsyncThunk(
+    'tasks/updateTaskStatus',
+    async ({ id, status }) => {
+        const response = await axios.put(`${API_URL}/task/${id}`, { status });
+        return response.data;
+    }
+);
 
 // Eliminar una tarea
 export const deleteTask = createAsyncThunk('task/deleteTask', async (id) => {
@@ -45,15 +44,14 @@ const taskSlice = createSlice({
             .addCase(addTask.fulfilled, (state, action) => {
                 state.push(action.payload);  // Añade la nueva tarea al estado
             })
-            // Edit task
-            .addCase(editTask.fulfilled, (state, action) => {
-                const { id, title, review } = action.payload;
-                const task = state.find(task => task.id === id);
-                if (task) {
-                    task.title = title;
-                    task.review = review;
+            //update status
+            .addCase(updateTaskStatus.fulfilled, (state, action) => {
+                const taskIndex = state.findIndex(task => task.id === action.payload.id);
+                if (taskIndex >= 0) {
+                    state[taskIndex].status = action.payload.status;
                 }
             })
+
             // Delete task
             .addCase(deleteTask.fulfilled, (state, action) => {
                 const taskIndex = state.findIndex(task => task.id === action.payload);
