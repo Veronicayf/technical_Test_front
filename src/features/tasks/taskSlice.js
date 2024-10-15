@@ -30,6 +30,12 @@ export const deleteTask = createAsyncThunk('task/deleteTask', async (id) => {
     return id;
 });
 
+//filtro por tarea completada
+export const fetchCompletedTasks = createAsyncThunk('task/fetchCompletedTasks', async () => {
+    const response = await axios.get(`${API_URL}/task/completed`);
+    return response.data;
+});
+
 const taskSlice = createSlice({
     name: 'task',
     initialState: [],
@@ -40,10 +46,17 @@ const taskSlice = createSlice({
             .addCase(fetchTasks.fulfilled, (state, action) => {
                 return action.payload;  // Actualiza el estado con las tareas obtenidas del backend
             })
+
+            // Fetch completed tasks
+            .addCase(fetchCompletedTasks.fulfilled, (state, action) => {
+                state.completedTasks = action.payload; // Actualiza las tareas completadas
+            })
+
             // Add task
             .addCase(addTask.fulfilled, (state, action) => {
                 state.push(action.payload);  // Añade la nueva tarea al estado
             })
+
             //update status
             .addCase(updateTaskStatus.fulfilled, (state, action) => {
                 const taskIndex = state.findIndex(task => task.id === action.payload.id);

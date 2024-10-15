@@ -1,16 +1,14 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteTask, fetchTasks, updateTaskStatus } from '../features/tasks/taskSlice';
+import { fetchCompletedTasks, deleteTask, updateTaskStatus } from '../features/tasks/taskSlice';
 import { Link } from 'react-router-dom';
 
-const TaskList = () => {
-
-    const tasks = useSelector(state => state.tasks);
+const CompletedTaskList = () => {
+    const completedTasks = useSelector(state => state.tasks.filter(task => task.status === true));
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchTasks());
+        dispatch(fetchCompletedTasks());
     }, [dispatch]);
 
     const handleDelete = (id) => {
@@ -18,29 +16,25 @@ const TaskList = () => {
     };
 
     const handleStatusToggle = (id, currentStatus) => {
-        dispatch(updateTaskStatus({ id, status: !currentStatus }))
-    }
+        dispatch(updateTaskStatus({ id, status: !currentStatus }));
+    };
 
     return (
         <div className="min-h-screen bg-white flex flex-col items-center p-6">
             <header className="w-full max-w-4xl mb-8">
-                <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Task Management</h1>
+                <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Completed Tasks</h1>
                 <div className="flex justify-between items-center">
-                    {/* <h2 className="text-xl text-gray-600">Tasks ({tasks.length})</h2> */}
-                    <Link to={'/create-task'} className="bg-indigo-600 text-white px-4 py-2 rounded-lg">
-                        Create Task
-                    </Link>
-                    <Link to={'/completed-tasks'} className="bg-indigo-300 text-black px-4 py-2 rounded-lg">
-                        List of completed tasks
+                    <Link to={'/'} className="bg-indigo-600 text-white px-4 py-2 rounded-lg">
+                        Back
                     </Link>
                 </div>
             </header>
 
-            {tasks.length === 0 ? (
-                <p className="text-gray-600 text-center">No tasks available.</p>
+            {completedTasks.length === 0 ? (
+                <p className="text-gray-600 text-center">No completed tasks available.</p>
             ) : (
                 <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {tasks.map(task => (
+                    {completedTasks.map(task => (
                         <div key={task.id} className="bg-white shadow-lg rounded-lg p-6">
                             <header className="flex justify-between items-center mb-4">
                                 <h3 className="text-xl font-semibold text-gray-800">{task.title}</h3>
@@ -67,4 +61,4 @@ const TaskList = () => {
     );
 };
 
-export default TaskList;
+export default CompletedTaskList;
