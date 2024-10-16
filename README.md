@@ -61,3 +61,10 @@ El uso de **Redux Toolkit** permitió gestionar el estado global de la aplicaci�
 * **Tailwind CSS:** Framework de utilidades CSS para el diseño.
 * **Axios:** Para hacer peticiones HTTP.
 * **JWT:** Para la autenticación de usuarios.
+
+
+## Enlace Backend
+2. **URL del backend**:[technical_test](https://github.com/Veronicayf/technical_test.git).
+
+
+
