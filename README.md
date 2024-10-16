@@ -64,7 +64,7 @@ El uso de **Redux Toolkit** permiti√≥ gestionar el estado global de la aplicaci√
 
 
 ## Enlace Backend
-2. **URL del backend**:[technical_test](https://github.com/Veronicayf/technical_test.git).
+2. **URL del backend**: [technical_test](https://github.com/Veronicayf/technical_test.git).
 
 
 
