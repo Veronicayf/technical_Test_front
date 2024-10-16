@@ -6,12 +6,23 @@ import { Link } from 'react-router-dom';
 
 const TaskList = () => {
 
-    const tasks = useSelector(state => state.tasks);
+    const tasks = useSelector(state => state.task);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchTasks());
     }, [dispatch]);
+
+    if (!Array.isArray(tasks)) {
+        return <p>array vacio</p>;
+    }
+
+    if (loading) {
+        return <p>Loading tasks...</p>;
+    }
+    if (error) {
+        return <p>Error loading tasks: {error}</p>;
+    }
 
     const handleDelete = (id) => {
         dispatch(deleteTask(id));
@@ -26,7 +37,6 @@ const TaskList = () => {
             <header className="w-full max-w-4xl mb-8">
                 <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Task Management</h1>
                 <div className="flex justify-between items-center">
-                    {/* <h2 className="text-xl text-gray-600">Tasks ({tasks.length})</h2> */}
                     <Link to={'/create-task'} className="bg-indigo-600 text-white px-4 py-2 rounded-lg">
                         Create Task
                     </Link>

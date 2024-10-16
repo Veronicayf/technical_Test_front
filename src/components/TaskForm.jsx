@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addTask, fetchTasks } from '../features/tasks/taskSlice';
+import { addTask } from '../features/tasks/taskSlice';
 import { v4 as uuid } from 'uuid';
 
 const TaskForm = () => {
@@ -36,7 +36,7 @@ const TaskForm = () => {
                 })
             );
         }
-        navigate('/');
+        navigate('/task');
     };
 
     useEffect(() => {
