@@ -43,7 +43,6 @@ El proyecto utiliza Tailwind CSS para el manejo de estilos, lo que permite una p
 
 ### Componentes
 Los principales componentes son:
-
 * **Formulario de Tareas:** Un formulario interactivo con campos de entrada resaltantes, optimizado para UX.
 * **Lista de Tareas:** Organizada en forma de cartas, permite marcar tareas como completadas.
 
