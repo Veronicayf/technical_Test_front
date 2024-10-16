@@ -25,7 +25,7 @@ cd tu-repositorio-frontend
 nvm use
 npm install
 ```
-### 3. Configurar Variables de Entorno
+## Variables de Entorno
 ```bash
 VITE_API_URL=http://localhost:3000/api
 VITE_APP_NAME=MiApp
@@ -55,6 +55,13 @@ El uso de **Redux Toolkit** permitió gestionar el estado global de la aplicaci�
 
 **Nota**: Este proyecto aún está en desarrollo, y estoy abierto a colaboraciones y sugerencias sobre cómo afrontar este desafío. Si tienes ideas o quieres contribuir, no dudes en contactarme.
 
+## Tecnologías Utilizadas
+* **Vite:** Como herramienta de desarrollo para un rendimiento óptimo.
+* **React:** Biblioteca de JavaScript para construir interfaces de usuario.
+* **Redux Toolkit:** Manejo del estado de la aplicación.
+* **Tailwind CSS:** Framework de utilidades CSS para el diseño.
+* **Axios:** Para hacer peticiones HTTP.
+* **JWT:** Para la autenticación de usuarios.
 
 
 
